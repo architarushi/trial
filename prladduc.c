@@ -1,0 +1,61 @@
+#include<stdio.h>
+long int a[100001],t,n,i,j,d1,d2,s,x;
+int main()
+{
+    scanf("%ld",&t);
+    while(t--)
+    {
+        scanf("%ld",&n);
+        for(i=0;i<n;i++)
+        {
+            scanf("%ld",&a[i]);
+        }
+        s=0;
+        for(i=0;i<n;i++)
+        {
+            d1=a[i];
+            if(a[i]>0)
+            {
+                for(j=0;j<n;j++)
+                {
+                    if(a[j]<0)
+                    {
+                        d2=a[j]+d1;
+                        if(d2>0)
+                        {
+                            if((j-i)<0)
+                                x=(j-i)*(-1);
+                            else
+                                x=(j-i);
+                            s+=x*a[j]*-1;
+                            d1=d2;
+                            a[j]=0;
+                        }
+                        if(d2==0)
+                        {
+                            a[j]=0;
+                            if((j-i)<0)
+                                x=(j-i)*(-1);
+                            else
+                                x=(j-i);
+                            s+=x*d1;
+                            break;
+                        }
+                        if(d2<0)
+                        {
+                            a[j]=a[j]+d1;
+                            if((j-i)<0)
+                                x=(j-i)*(-1);
+                            else
+                                x=(j-i);
+                            s+=x*d1;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        printf("%lu\n",s);
+    }
+    return 0;
+}
